@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b7800eda22049858d2c114cb075e83e" Name="Diagram1">
+        <EntityTypeShape EntityType="BookshopModel.archive_books" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.authors" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.books" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.first_names" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.genres" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.last_names" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.middle_names" Width="1.5" PointX="3.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.publishers" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookshopModel.users" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="BookshopModel.FK__archive_b__autho__41EDCAC5" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__archive_b__genre__43D61337" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__archive_b__publi__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__authors__first_n__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__authors__last_na__1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__authors__middle___208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__books__author_id__37703C52" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__books__genre_id__395884C4" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__books__publisher__3864608B" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__users__first_nam__4D5F7D71" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__users__last_name__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="BookshopModel.FK__users__middle_na__4E53A1AA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

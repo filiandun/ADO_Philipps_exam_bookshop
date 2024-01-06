@@ -1,0 +1,190 @@
+﻿<Page x:Class="BookshopApp.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookshopApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="1050" d:DesignWidth="1680"
+      Title="AdminPage" Background="White">
+
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ЛЕВАЯ КОЛОННА -->
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <UniformGrid Grid.Column="0" Rows="1">
+                <Button x:Name="previousButton" Content="Назад" Margin="5, 5, 0, 5" Click="previousButton_Click"/>
+                <Button x:Name="nextButton" Content="Вперёд" Margin="5, 5, 0, 5" Click="nextButton_Click"/>
+            </UniformGrid>
+
+            <Grid Grid.Column="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="gridTextBlock" Grid.Row="0" Text="Архив книг" FontSize="40"/>
+                <TextBlock Grid.Row="1" Text="Последняя добавленная книга: " FontSize="15"/>
+                <TextBlock x:Name="lastArchiveTextBlock" Grid.Row="1" HorizontalAlignment="Right" Text="*книга*" FontSize="15"/>
+            </Grid>
+        </Grid>
+
+        <!-- АРХИВ КНИГ -->
+        <DataGrid x:Name="archiveDataGrid" Grid.Column="0" Grid.Row="2" Margin="5" HorizontalContentAlignment="Right" AutoGenerateColumns="False" ColumnWidth="auto" Background="White" BorderBrush="Black" IsReadOnly="True" CanUserResizeColumns="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="0.5*" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Название" Width="7*" Binding="{Binding Title}"/>
+
+                <DataGridTextColumn Header="Автор" Width="5*" Binding="{Binding Author}"/>
+                <DataGridTextColumn Header="Издательство" Width="3*" Binding="{Binding Publisher}"/>
+                <DataGridTextColumn Header="Жанр" Width="2*" Binding="{Binding Genre}"/>
+
+                <DataGridTextColumn Header="Цена" Width="1.5*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Стоимость" Width="1.5*" Binding="{Binding Cost}"/>
+
+                <DataGridTextColumn Header="Скидка %" Width="1.5*" Binding="{Binding Discount}"/>
+
+                <DataGridTextColumn Header="Кол-во в наличии" Width="2*" Binding="{Binding Quantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- СПИСОК АВТОРОВ -->
+        <DataGrid x:Name="authorsDataGrid" Grid.Column="0" Grid.Row="2" Margin="5" HorizontalContentAlignment="Right" AutoGenerateColumns="False" ColumnWidth="auto" Background="White" BorderBrush="Black" IsReadOnly="True" CanUserResizeColumns="False" SelectionMode="Single" Visibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="0.5*" Binding="{Binding Id}"/>
+
+                <DataGridTextColumn Header="Фамилия" Width="5*" Binding="{Binding Lastname}"/>
+                <DataGridTextColumn Header="Имя" Width="5*" Binding="{Binding Firstname}"/>
+                <DataGridTextColumn Header="Отчество" Width="5*" Binding="{Binding Middlename}"/>
+
+                <DataGridTextColumn Header="Кол-во книг" Width="1*" Binding="{Binding BooksQuantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- СПИСОК ИЗДАНИЙ -->
+        <DataGrid x:Name="publishersDataGrid" Grid.Column="0" Grid.Row="2" Margin="5" HorizontalContentAlignment="Right" AutoGenerateColumns="False" ColumnWidth="auto" Background="White" BorderBrush="Black" IsReadOnly="True" CanUserResizeColumns="False" SelectionMode="Single" Visibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="0.5*" Binding="{Binding Id}"/>
+
+                <DataGridTextColumn Header="Наименование" Width="7*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Адрес" Width="8*" Binding="{Binding Address}"/>
+
+                <DataGridTextColumn Header="Кол-во книг" Width="1*" Binding="{Binding BooksQuantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- СПИСОК ЖАНРОВ -->
+        <DataGrid x:Name="genresDataGrid" Grid.Column="0" Grid.Row="2" Margin="5" HorizontalContentAlignment="Right" AutoGenerateColumns="False" ColumnWidth="auto" Background="White" BorderBrush="Black" IsReadOnly="True" CanUserResizeColumns="False" SelectionMode="Single" Visibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="0.5*" Binding="{Binding Id}"/>
+
+                <DataGridTextColumn Header="Название" Width="10*" Binding="{Binding Name}"/>
+
+                <DataGridTextColumn Header="Кол-во книг" Width="1*" Binding="{Binding BooksQuantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- КНОПКА С ФИЛЬТРАМИ И НАДПИСЬ -->
+        <Grid Grid.Column="0" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <UniformGrid Grid.Column="0" Rows="1">
+                <Button x:Name="filterButton" Content="Фильтры" Margin="5, 5, 0, 5" Click="filterButton_Click"/>
+                <Button x:Name="updateButton" Content="Обновить" Margin="5, 5, 0, 5" Click="updateButton_Click"/>
+            </UniformGrid>
+
+            <Grid Grid.Column="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Каталог книг" FontSize="40"/>
+                <TextBlock Grid.Row="1" Text="Последняя изменённая книга: " FontSize="15"/>
+                <TextBlock x:Name="lastEditTextBlock" Grid.Row="1" HorizontalAlignment="Right" Text="*книга*" FontSize="15"/>
+            </Grid>
+        </Grid>
+        
+        <!-- КАТАЛОГ КНИГ -->
+        <DataGrid x:Name="catalogDataGrid" Grid.Column="0" Grid.Row="4" Margin="5" HorizontalContentAlignment="Right" AutoGenerateColumns="False" ColumnWidth="auto" Background="White" BorderBrush="Black" IsReadOnly="True" CanUserResizeColumns="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="0.5*" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Название" Width="7*" Binding="{Binding Title}"/>
+                
+                <DataGridTextColumn Header="Автор" Width="5*" Binding="{Binding Author}"/>
+                <DataGridTextColumn Header="Издательство" Width="3*" Binding="{Binding Publisher}"/>
+                <DataGridTextColumn Header="Жанр" Width="2*" Binding="{Binding Genre}"/>
+                          
+                <DataGridTextColumn Header="Цена" Width="1.5*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Стоимость" Width="1.5*" Binding="{Binding Cost}"/>
+                
+                <DataGridTextColumn Header="Скидка %" Width="1.5*" Binding="{Binding Discount}"/>
+
+                <DataGridTextColumn Header="Кол-во в наличии" Width="2*" Binding="{Binding Quantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!-- ПРАВАЯ КОЛОННА -->
+        <!-- УПРАВЛЕНИЕ КНИГАМИ В АРХИВЕ -->
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <UniformGrid x:Name="archiveButtonUniformGrid" Grid.Row="0" Rows="1" Columns="2">
+                <Button x:Name="restoreBookButton" Content="Вернуть в продажу" Margin="5, 5, 0, 5" Background="LightGreen" Click="restoreBookButton_Click"/>
+                <Button x:Name="deleteBookButton" Content="Удалить из архива" Margin="5, 5, 5, 5" Background="IndianRed" Click="deleteBookButton_Click"/>
+            </UniformGrid>
+
+            <UniformGrid x:Name="apgButtonUniformGrid" Grid.Row="0" Rows="1" Columns="3" Visibility="Hidden">
+                <Button x:Name="editButton" Content="Изменить" Margin="5, 5, 0, 5" Click="editButton_Click"/>
+                <Button x:Name="addButton" Content="Добавить" Margin="5, 5, 0, 5" Click="addButton_Click"/>
+                <Button x:Name="deleteButton" Content="Удалить" Margin="5, 5, 5, 5" Click="deleteButton_Click"/>
+            </UniformGrid>
+        </Grid>
+
+        <!-- УПРАВЛЕНИЕ КНИГАМИ В КАТАЛОГЕ -->
+        <Grid Grid.Column="1" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <UniformGrid Grid.Row="0" Rows="2" Columns="2">
+                <Button x:Name="editBookButton" Content="Редактировать книгу" Margin="5, 5, 0, 5" Click="editBookButton_Click"/>
+                <Button x:Name="archiveBookButton" Content="Отправить в архив" Margin="5, 5, 5, 5" Click="archiveBookButton_Click"/>
+                
+                <Button x:Name="addBookButton" Content="Добавить новую книгу" Margin="5, 5, 0, 5" Click="addBookButton_Click"/>
+            </UniformGrid>
+            
+            <UniformGrid Grid.Row="1" Rows="1" Columns="1">
+                <Button x:Name="addDiscountButton" Content="Добавить акцию" Margin="5, 5, 0, 5" Click="addDiscountButton_Click"/>
+            </UniformGrid>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,742 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BookshopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="archive_books">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="book_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="author_id" Type="int" Nullable="false" />
+          <Property Name="publisher_id" Type="int" Nullable="false" />
+          <Property Name="genre_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+          <Property Name="discount_percent" Type="int" Nullable="false" />
+          <Property Name="image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="authors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="last_name_id" Type="int" />
+          <Property Name="first_name_id" Type="int" Nullable="false" />
+          <Property Name="middle_name_id" Type="int" />
+        </EntityType>
+        <EntityType Name="books">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="book_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="author_id" Type="int" Nullable="false" />
+          <Property Name="publisher_id" Type="int" Nullable="false" />
+          <Property Name="genre_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+          <Property Name="discount_percent" Type="int" Nullable="false" />
+          <Property Name="image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="first_names">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genres">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genre_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="last_names">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="middle_names">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="middle_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="publishers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="publisher_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="publisher_address" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name_id" Type="int" />
+          <Property Name="first_name_id" Type="int" Nullable="false" />
+          <Property Name="middle_name_id" Type="int" />
+          <Property Name="is_admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__archive_b__autho__41EDCAC5">
+          <End Role="authors" Type="Self.authors" Multiplicity="1" />
+          <End Role="archive_books" Type="Self.archive_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="archive_books">
+              <PropertyRef Name="author_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__archive_b__genre__43D61337">
+          <End Role="genres" Type="Self.genres" Multiplicity="1" />
+          <End Role="archive_books" Type="Self.archive_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genres">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="archive_books">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__archive_b__publi__42E1EEFE">
+          <End Role="publishers" Type="Self.publishers" Multiplicity="1" />
+          <End Role="archive_books" Type="Self.archive_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="archive_books">
+              <PropertyRef Name="publisher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__authors__first_n__1F98B2C1">
+          <End Role="first_names" Type="Self.first_names" Multiplicity="1" />
+          <End Role="authors" Type="Self.authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="first_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="authors">
+              <PropertyRef Name="first_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__authors__last_na__1EA48E88">
+          <End Role="last_names" Type="Self.last_names" Multiplicity="0..1" />
+          <End Role="authors" Type="Self.authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="last_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="authors">
+              <PropertyRef Name="last_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__authors__middle___208CD6FA">
+          <End Role="middle_names" Type="Self.middle_names" Multiplicity="0..1" />
+          <End Role="authors" Type="Self.authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="middle_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="authors">
+              <PropertyRef Name="middle_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__books__author_id__37703C52">
+          <End Role="authors" Type="Self.authors" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="author_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__books__genre_id__395884C4">
+          <End Role="genres" Type="Self.genres" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genres">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__books__publisher__3864608B">
+          <End Role="publishers" Type="Self.publishers" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="publisher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__first_nam__4D5F7D71">
+          <End Role="first_names" Type="Self.first_names" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="first_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="first_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__last_name__4C6B5938">
+          <End Role="last_names" Type="Self.last_names" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="last_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="last_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__middle_na__4E53A1AA">
+          <End Role="middle_names" Type="Self.middle_names" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="middle_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="middle_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BookshopModelContainer">
+          <EntitySet Name="archive_books" EntityType="Self.archive_books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="authors" EntityType="Self.authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="books" EntityType="Self.books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="first_names" EntityType="Self.first_names" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="genres" EntityType="Self.genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="last_names" EntityType="Self.last_names" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="middle_names" EntityType="Self.middle_names" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="publishers" EntityType="Self.publishers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__archive_b__autho__41EDCAC5" Association="Self.FK__archive_b__autho__41EDCAC5">
+            <End Role="authors" EntitySet="authors" />
+            <End Role="archive_books" EntitySet="archive_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__archive_b__genre__43D61337" Association="Self.FK__archive_b__genre__43D61337">
+            <End Role="genres" EntitySet="genres" />
+            <End Role="archive_books" EntitySet="archive_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__archive_b__publi__42E1EEFE" Association="Self.FK__archive_b__publi__42E1EEFE">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="archive_books" EntitySet="archive_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__authors__first_n__1F98B2C1" Association="Self.FK__authors__first_n__1F98B2C1">
+            <End Role="first_names" EntitySet="first_names" />
+            <End Role="authors" EntitySet="authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__authors__last_na__1EA48E88" Association="Self.FK__authors__last_na__1EA48E88">
+            <End Role="last_names" EntitySet="last_names" />
+            <End Role="authors" EntitySet="authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__authors__middle___208CD6FA" Association="Self.FK__authors__middle___208CD6FA">
+            <End Role="middle_names" EntitySet="middle_names" />
+            <End Role="authors" EntitySet="authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__books__author_id__37703C52" Association="Self.FK__books__author_id__37703C52">
+            <End Role="authors" EntitySet="authors" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__books__genre_id__395884C4" Association="Self.FK__books__genre_id__395884C4">
+            <End Role="genres" EntitySet="genres" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__books__publisher__3864608B" Association="Self.FK__books__publisher__3864608B">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__first_nam__4D5F7D71" Association="Self.FK__users__first_nam__4D5F7D71">
+            <End Role="first_names" EntitySet="first_names" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__last_name__4C6B5938" Association="Self.FK__users__last_name__4C6B5938">
+            <End Role="last_names" EntitySet="last_names" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__middle_na__4E53A1AA" Association="Self.FK__users__middle_na__4E53A1AA">
+            <End Role="middle_names" EntitySet="middle_names" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BookshopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="archive_books">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="book_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="author_id" Type="Int32" Nullable="false" />
+          <Property Name="publisher_id" Type="Int32" Nullable="false" />
+          <Property Name="genre_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <Property Name="discount_percent" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="authors" Relationship="Self.FK__archive_b__autho__41EDCAC5" FromRole="archive_books" ToRole="authors" />
+          <NavigationProperty Name="genres" Relationship="Self.FK__archive_b__genre__43D61337" FromRole="archive_books" ToRole="genres" />
+          <NavigationProperty Name="publishers" Relationship="Self.FK__archive_b__publi__42E1EEFE" FromRole="archive_books" ToRole="publishers" />
+        </EntityType>
+        <EntityType Name="authors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="last_name_id" Type="Int32" />
+          <Property Name="first_name_id" Type="Int32" Nullable="false" />
+          <Property Name="middle_name_id" Type="Int32" />
+          <NavigationProperty Name="archive_books" Relationship="Self.FK__archive_b__autho__41EDCAC5" FromRole="authors" ToRole="archive_books" />
+          <NavigationProperty Name="first_names" Relationship="Self.FK__authors__first_n__1F98B2C1" FromRole="authors" ToRole="first_names" />
+          <NavigationProperty Name="last_names" Relationship="Self.FK__authors__last_na__1EA48E88" FromRole="authors" ToRole="last_names" />
+          <NavigationProperty Name="middle_names" Relationship="Self.FK__authors__middle___208CD6FA" FromRole="authors" ToRole="middle_names" />
+          <NavigationProperty Name="books" Relationship="Self.FK__books__author_id__37703C52" FromRole="authors" ToRole="books" />
+        </EntityType>
+        <EntityType Name="books">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="book_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="author_id" Type="Int32" Nullable="false" />
+          <Property Name="publisher_id" Type="Int32" Nullable="false" />
+          <Property Name="genre_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <Property Name="discount_percent" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="authors" Relationship="Self.FK__books__author_id__37703C52" FromRole="books" ToRole="authors" />
+          <NavigationProperty Name="genres" Relationship="Self.FK__books__genre_id__395884C4" FromRole="books" ToRole="genres" />
+          <NavigationProperty Name="publishers" Relationship="Self.FK__books__publisher__3864608B" FromRole="books" ToRole="publishers" />
+        </EntityType>
+        <EntityType Name="first_names">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="authors" Relationship="Self.FK__authors__first_n__1F98B2C1" FromRole="first_names" ToRole="authors" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__first_nam__4D5F7D71" FromRole="first_names" ToRole="users" />
+        </EntityType>
+        <EntityType Name="genres">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genre_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="archive_books" Relationship="Self.FK__archive_b__genre__43D61337" FromRole="genres" ToRole="archive_books" />
+          <NavigationProperty Name="books" Relationship="Self.FK__books__genre_id__395884C4" FromRole="genres" ToRole="books" />
+        </EntityType>
+        <EntityType Name="last_names">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="authors" Relationship="Self.FK__authors__last_na__1EA48E88" FromRole="last_names" ToRole="authors" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__last_name__4C6B5938" FromRole="last_names" ToRole="users" />
+        </EntityType>
+        <EntityType Name="middle_names">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="authors" Relationship="Self.FK__authors__middle___208CD6FA" FromRole="middle_names" ToRole="authors" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__middle_na__4E53A1AA" FromRole="middle_names" ToRole="users" />
+        </EntityType>
+        <EntityType Name="publishers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="publisher_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="publisher_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="archive_books" Relationship="Self.FK__archive_b__publi__42E1EEFE" FromRole="publishers" ToRole="archive_books" />
+          <NavigationProperty Name="books" Relationship="Self.FK__books__publisher__3864608B" FromRole="publishers" ToRole="books" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name_id" Type="Int32" />
+          <Property Name="first_name_id" Type="Int32" Nullable="false" />
+          <Property Name="middle_name_id" Type="Int32" />
+          <Property Name="is_admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="first_names" Relationship="Self.FK__users__first_nam__4D5F7D71" FromRole="users" ToRole="first_names" />
+          <NavigationProperty Name="last_names" Relationship="Self.FK__users__last_name__4C6B5938" FromRole="users" ToRole="last_names" />
+          <NavigationProperty Name="middle_names" Relationship="Self.FK__users__middle_na__4E53A1AA" FromRole="users" ToRole="middle_names" />
+        </EntityType>
+        <Association Name="FK__archive_b__autho__41EDCAC5">
+          <End Role="authors" Type="Self.authors" Multiplicity="1" />
+          <End Role="archive_books" Type="Self.archive_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="archive_books">
+              <PropertyRef Name="author_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__archive_b__genre__43D61337">
+          <End Role="genres" Type="Self.genres" Multiplicity="1" />
+          <End Role="archive_books" Type="Self.archive_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genres">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="archive_books">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__archive_b__publi__42E1EEFE">
+          <End Role="publishers" Type="Self.publishers" Multiplicity="1" />
+          <End Role="archive_books" Type="Self.archive_books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="archive_books">
+              <PropertyRef Name="publisher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__authors__first_n__1F98B2C1">
+          <End Role="first_names" Type="Self.first_names" Multiplicity="1" />
+          <End Role="authors" Type="Self.authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="first_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="authors">
+              <PropertyRef Name="first_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__authors__last_na__1EA48E88">
+          <End Role="last_names" Type="Self.last_names" Multiplicity="0..1" />
+          <End Role="authors" Type="Self.authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="last_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="authors">
+              <PropertyRef Name="last_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__authors__middle___208CD6FA">
+          <End Role="middle_names" Type="Self.middle_names" Multiplicity="0..1" />
+          <End Role="authors" Type="Self.authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="middle_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="authors">
+              <PropertyRef Name="middle_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__books__author_id__37703C52">
+          <End Role="authors" Type="Self.authors" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="author_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__books__genre_id__395884C4">
+          <End Role="genres" Type="Self.genres" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genres">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__books__publisher__3864608B">
+          <End Role="publishers" Type="Self.publishers" Multiplicity="1" />
+          <End Role="books" Type="Self.books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="books">
+              <PropertyRef Name="publisher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__first_nam__4D5F7D71">
+          <End Role="first_names" Type="Self.first_names" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="first_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="first_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__last_name__4C6B5938">
+          <End Role="last_names" Type="Self.last_names" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="last_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="last_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__middle_na__4E53A1AA">
+          <End Role="middle_names" Type="Self.middle_names" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="middle_names">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="middle_name_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BookshopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="archive_books" EntityType="Self.archive_books" />
+          <EntitySet Name="authors" EntityType="Self.authors" />
+          <EntitySet Name="books" EntityType="Self.books" />
+          <EntitySet Name="first_names" EntityType="Self.first_names" />
+          <EntitySet Name="genres" EntityType="Self.genres" />
+          <EntitySet Name="last_names" EntityType="Self.last_names" />
+          <EntitySet Name="middle_names" EntityType="Self.middle_names" />
+          <EntitySet Name="publishers" EntityType="Self.publishers" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK__archive_b__autho__41EDCAC5" Association="Self.FK__archive_b__autho__41EDCAC5">
+            <End Role="authors" EntitySet="authors" />
+            <End Role="archive_books" EntitySet="archive_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__archive_b__genre__43D61337" Association="Self.FK__archive_b__genre__43D61337">
+            <End Role="genres" EntitySet="genres" />
+            <End Role="archive_books" EntitySet="archive_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__archive_b__publi__42E1EEFE" Association="Self.FK__archive_b__publi__42E1EEFE">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="archive_books" EntitySet="archive_books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__authors__first_n__1F98B2C1" Association="Self.FK__authors__first_n__1F98B2C1">
+            <End Role="first_names" EntitySet="first_names" />
+            <End Role="authors" EntitySet="authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__authors__last_na__1EA48E88" Association="Self.FK__authors__last_na__1EA48E88">
+            <End Role="last_names" EntitySet="last_names" />
+            <End Role="authors" EntitySet="authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__authors__middle___208CD6FA" Association="Self.FK__authors__middle___208CD6FA">
+            <End Role="middle_names" EntitySet="middle_names" />
+            <End Role="authors" EntitySet="authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__books__author_id__37703C52" Association="Self.FK__books__author_id__37703C52">
+            <End Role="authors" EntitySet="authors" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__books__genre_id__395884C4" Association="Self.FK__books__genre_id__395884C4">
+            <End Role="genres" EntitySet="genres" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__books__publisher__3864608B" Association="Self.FK__books__publisher__3864608B">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="books" EntitySet="books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__first_nam__4D5F7D71" Association="Self.FK__users__first_nam__4D5F7D71">
+            <End Role="first_names" EntitySet="first_names" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__last_name__4C6B5938" Association="Self.FK__users__last_name__4C6B5938">
+            <End Role="last_names" EntitySet="last_names" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__middle_na__4E53A1AA" Association="Self.FK__users__middle_na__4E53A1AA">
+            <End Role="middle_names" EntitySet="middle_names" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BookshopModelContainer" CdmEntityContainer="BookshopEntities">
+          <EntitySetMapping Name="archive_books">
+            <EntityTypeMapping TypeName="BookshopModel.archive_books">
+              <MappingFragment StoreEntitySet="archive_books">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="book_name" ColumnName="book_name" />
+                <ScalarProperty Name="author_id" ColumnName="author_id" />
+                <ScalarProperty Name="publisher_id" ColumnName="publisher_id" />
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="authors">
+            <EntityTypeMapping TypeName="BookshopModel.authors">
+              <MappingFragment StoreEntitySet="authors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="last_name_id" ColumnName="last_name_id" />
+                <ScalarProperty Name="first_name_id" ColumnName="first_name_id" />
+                <ScalarProperty Name="middle_name_id" ColumnName="middle_name_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="books">
+            <EntityTypeMapping TypeName="BookshopModel.books">
+              <MappingFragment StoreEntitySet="books">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="book_name" ColumnName="book_name" />
+                <ScalarProperty Name="author_id" ColumnName="author_id" />
+                <ScalarProperty Name="publisher_id" ColumnName="publisher_id" />
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="first_names">
+            <EntityTypeMapping TypeName="BookshopModel.first_names">
+              <MappingFragment StoreEntitySet="first_names">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genres">
+            <EntityTypeMapping TypeName="BookshopModel.genres">
+              <MappingFragment StoreEntitySet="genres">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="genre_name" ColumnName="genre_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="last_names">
+            <EntityTypeMapping TypeName="BookshopModel.last_names">
+              <MappingFragment StoreEntitySet="last_names">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="middle_names">
+            <EntityTypeMapping TypeName="BookshopModel.middle_names">
+              <MappingFragment StoreEntitySet="middle_names">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="publishers">
+            <EntityTypeMapping TypeName="BookshopModel.publishers">
+              <MappingFragment StoreEntitySet="publishers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="publisher_name" ColumnName="publisher_name" />
+                <ScalarProperty Name="publisher_address" ColumnName="publisher_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="BookshopModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="last_name_id" ColumnName="last_name_id" />
+                <ScalarProperty Name="first_name_id" ColumnName="first_name_id" />
+                <ScalarProperty Name="middle_name_id" ColumnName="middle_name_id" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

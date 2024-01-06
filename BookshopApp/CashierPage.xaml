@@ -1,0 +1,147 @@
+﻿<Page x:Class="BookshopApp.CashierPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookshopApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="1050" d:DesignWidth="1680"
+      Title="CashierPage" Background="White">
+
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ЛЕВАЯ КОЛОННА -->
+        <DataGrid x:Name="cartDataGrid" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" AutoGenerateColumns="False" ColumnWidth="auto" Background="White" BorderBrush="Black" IsReadOnly="True" CanUserSortColumns="False" CanUserResizeColumns="False" SelectionMode="Single" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="0.5*" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Название" Width="8*" Binding="{Binding Title}"/>
+                
+                <DataGridTextColumn Header="Автор" Width="4*" Binding="{Binding Author}"/>
+                
+                <DataGridTextColumn Header="Цена за шт." Width="*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Скидка %" Width="1.5*" Binding="{Binding Discount}"/>
+
+                <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Сумма" Width="1.5*" Binding="{Binding Sum}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <UniformGrid x:Name="controlsUniformGrid" Grid.Column="0" Rows="1">
+                <Button x:Name="filterButton" Content="Filter" Margin="5, 5, 0, 5" Click="filterButton_Click"/>
+                <Button x:Name="updateButton" Content="Update" Margin="5, 5, 0, 5" Click="updateButton_Click"/>
+            </UniformGrid>
+
+            <UniformGrid Grid.Column="1" Rows="1">
+                <TextBlock Grid.Column="1" Margin="5, 5, 0, 5" HorizontalAlignment="Left" Text="Итого:" FontSize="55"/>
+                <TextBlock x:Name="totalTextBlock" Grid.Column="1" Margin="5, 5, 0, 5" HorizontalAlignment="Right" Text="" FontSize="55"/>
+            </UniformGrid>
+        </Grid>
+
+        <!-- ОПЛАТА -->
+        <Grid x:Name="paymentGrid" Grid.Row="3" Grid.Column="0" Margin="0, 0, 0, 10" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <UniformGrid Grid.Column="0" Grid.Row="3" Rows="3" Columns="1">
+                <Button x:Name="cashPaymentButton" Margin="5, 10, 0, 5" Content="Оплата наличными" Click="cashPaymentButton_Click"/>
+                <Button x:Name="cardPaymentButton" Margin="5, 10, 0, 5" Content="Оплата по карте" Click="cardPaymentButton_Click"/>
+                <Button x:Name="closeButton" Margin="5, 10, 0, 5" Content="Отменить оплату" Click="closeButton_Click"/>
+            </UniformGrid>
+
+            <Label Grid.Column="1" Margin="5, 5, 0, 5" HorizontalAlignment="Left" Content="Дайте сдачи:" FontSize="26"/>
+            <Label x:Name="changeLabel" Grid.Column="1" Margin="5, 5, 0, 5" HorizontalAlignment="Right" Content="0" FontSize="26"/>
+        </Grid>
+
+        <!-- КАТАЛОГ -->
+        <DataGrid x:Name="catalogDataGrid" Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right" AutoGenerateColumns="False" ColumnWidth="auto" Background="White" BorderBrush="Black" IsReadOnly="True" CanUserResizeColumns="False" SelectionMode="Single" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="0.5*" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Название" Width="7*" Binding="{Binding Title}"/>
+                
+                <DataGridTextColumn Header="Автор" Width="5*" Binding="{Binding Author}"/>
+                <DataGridTextColumn Header="Издательство" Width="3*" Binding="{Binding Publisher}"/>
+                <DataGridTextColumn Header="Жанр" Width="2*" Binding="{Binding Genre}"/>
+                
+                <DataGridTextColumn Header="Цена" Width="1.5*" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Скидка %" Width="1.5*" Binding="{Binding Discount}"/>
+
+                <DataGridTextColumn Header="Кол-во в наличии" Width="2*" Binding="{Binding Quantity}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- ПРАВАЯ КОЛОННА -->
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- +1 И -1 -->
+
+            <!-- ЦИФРЫ NUMPAD -->
+            <UniformGrid x:Name="numsUniformGrid" Grid.Row="0" Rows="4" Columns="3">
+                <Button Content="7" Margin="5, 5, 0, 0" Click="numButton_Click"/>
+                <Button Content="8" Margin="5, 5, 0, 0" Click="numButton_Click"/>
+                <Button Content="9" Margin="5, 5, 5, 0" Click="numButton_Click"/>
+
+                <Button Content="4" Margin="5, 5, 0, 0" Click="numButton_Click"/>
+                <Button Content="5" Margin="5, 5, 0, 0" Click="numButton_Click"/>
+                <Button Content="6" Margin="5, 5, 5, 0" Click="numButton_Click"/>
+
+                <Button Content="1" Margin="5, 5, 0, 0" Click="numButton_Click"/>
+                <Button Content="2" Margin="5, 5, 0, 0" Click="numButton_Click"/>
+                <Button Content="3" Margin="5, 5, 5, 0" Click="numButton_Click"/>
+
+                <Button Content="+1" Margin="5, 5, 0, 5" Click="plusOneButton_Click"/>
+                <Button Content="0" Margin="5, 5, 0, 5" Click="numButton_Click"/>
+                <Button Content="-1" Margin="5, 5, 5, 5" Click="minusOneButton_Click"/>
+            </UniformGrid>
+
+            <!-- ENTER И BACKSPACE -->
+            <UniformGrid x:Name="enterBackUniformGrid" Grid.Row="2" Rows="1">
+                <Button x:Name="enterButton" Content="Enter" Margin="5, 5, 0, 5" Background="LightGreen"/>
+                <Button x:Name="backspaceButton" Content="Backspace" Margin="5, 5, 5, 5" Background="IndianRed" Click="backspaceButton_Click"/>
+            </UniformGrid>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <!-- ДОБАВИТЬ И УДАЛИТЬ КНИГУ В КОРЗИНУ -->
+            <UniformGrid Grid.Row="0" Rows="1">
+                <Button x:Name="addButton" Content="Добавить" Margin="5, 5, 0, 5" Click="addButton_Click"/>
+                <Button x:Name="deleteButton" Content="Удалить" Margin="5, 5, 5, 5" Click="deleteButton_Click"/>
+            </UniformGrid>
+
+            <!-- ОПЛАТА -->
+            <Button Grid.Row="1" x:Name="payButton" Content="Оплата" Margin="5, 5, 5, 5" Click="payButton_Click"/>
+
+            <!-- ВЫДАТЬ ЧЕК -->
+            <Button Grid.Row="2" x:Name="checkButton" Content="Пробить чек" Margin="5, 5, 5, 5" Click="checkButton_Click"/>
+        </Grid>
+    </Grid>
+</Page>
+
